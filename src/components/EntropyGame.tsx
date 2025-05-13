@@ -1,13 +1,16 @@
-// import { GuessForm } from "./GuessForm";
-
 import { GuessDisplay } from "./GuessDisplay";
-import { Grid, Typography, Card, CardContent } from "@mui/material";
+import { Grid } from "@mui/material";
 import { AnswerCard } from "./AnswerCard";
-import { Settings } from "./TargetDisplayArea/Settings";
+import { Settings } from "./Settings";
 import { Header } from "./Header";
-export const EntropyGame = ({}) => {
+
+interface EntropyGameProps {
+  className?: string;
+}
+
+export const EntropyGame = ({ className }: EntropyGameProps) => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={className}>
       <Grid size={12}>
         <Header />
       </Grid>

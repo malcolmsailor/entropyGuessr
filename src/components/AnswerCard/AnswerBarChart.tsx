@@ -20,7 +20,6 @@ export const AnswerBarChart = ({ gridSize }: AnswerBarChartProps) => {
 
   const containerRef = useRef(null);
   const [width, setWidth] = useState(400);
-  // const [height, setHeight] = useState(100);
   const height = 100;
 
   useEffect(() => {
@@ -28,7 +27,6 @@ export const AnswerBarChart = ({ gridSize }: AnswerBarChartProps) => {
 
     const resizeObserver = new ResizeObserver((entries) => {
       setWidth(entries[0].contentRect.width);
-      // setHeight(entries[0].contentRect.height);
     });
 
     resizeObserver.observe(containerRef.current);

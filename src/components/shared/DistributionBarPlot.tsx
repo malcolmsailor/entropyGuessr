@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, YAxis } from "recharts";
 
 interface DistributionBarPlotProps {
   distribution: number[];
@@ -18,7 +18,7 @@ export const DistributionBarPlot: React.FC<DistributionBarPlotProps> = ({
   }));
   // Multiply by 1.3 to leave space for labels
   const yMax = Math.max(1, Math.max(...distribution) * 1.3);
-  // TODO: (Malcolm 2025-05-06) set width and height to be dynamic
+
   return (
     <BarChart width={width} height={height} data={data}>
       <YAxis domain={[0, yMax]} hide={true} />

@@ -6,6 +6,10 @@ import type {
 function isValidFloat(str: string) {
   const trimmed = str.trim();
   const parsed = parseFloat(trimmed);
+  // Handle special case of zero with decimal places
+  if (parsed === 0 && /^0\.0+$/.test(trimmed)) {
+    return true;
+  }
   return !isNaN(parsed) && parsed.toString().length === trimmed.length;
 }
 

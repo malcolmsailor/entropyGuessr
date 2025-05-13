@@ -13,65 +13,27 @@ npm install recharts
 
 # Component spec
 
-Example from Claude:
-
-```
-MathGuessingGame
-|-- Settings
-|   |-- DifficultySelector
-|   |-- NumberRangeInput
-|   |-- OperationTypeSelector
-|-- GuessForm
-|   |-- AnswerInput
-|   |-- ConstraintToggles
-|   |   |-- IntegerOnlyToggle
-|   |   |-- FractionFormatToggle
-|   |   |-- DecimalPlacesSelector
-|   |-- SubmitButton
-|-- ResultsDisplay
-    |-- CurrentGuessResult
-    |   |-- CorrectAnswerDisplay
-    |   |-- FeedbackMessage
-    |-- GuessHistory
-        |-- GuessItem
-```
-
 ```
 EntropyGuessingGame
 |-- Shared
 |   |-- DistributionBarPlot
-|-- TargetDisplayArea
-|   |-- Settings
-|   |   |-- NumberOfOutcomesInput
-|   |   |-- MetricSelector
-|   |-- TargetDisplay
-|   |-- NewTargetButton
-|-- GuessForm
-|   |-- AnswerCard
-|   |   |-- AnswerInput
-|   |   |-- AnswerBarChart
+|-- Header
+|-- Settings
+|   |-- NumberOfOutcomesInput
+|   |-- MetricSelector
 |   |-- ConstraintToggles
 |   |   |-- SumToOneToggle // No separate file
 |   |   |-- NonZeroToggle  // No separate file
-|   |-- SubmitButton
+|-- AnswerCard
+|   |-- AnswerInput
+|   |-- CalculateButton
+|   |-- AnswerBarChart
 |-- GuessDisplay
-    |-- ValueLines
-    |-- GuessCardsContainer
-        |-- GuessCard (multiple instances)
-            |-- GuessPoint
-            |-- DistanceLine
-            |-- GuessCardContent
-```
-
-GuessesCard should have:
-- three labeled horizontal lines for each of min, max, and target
-- cards for each 
-
-`logic/` folder structure
+|   |-- ResultsCard
+|   |   |-- NewTargetButton
+|   |-- GuessChart
+|   |   |-- GuessTooltip
+|   |   |-- TooltipBarChart
 
 ```
-logic/
-  TODO
-```
-
 

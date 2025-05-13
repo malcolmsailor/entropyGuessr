@@ -9,13 +9,12 @@ import {
   ScatterChart,
   Cell,
 } from "recharts";
-import { Box, CardContent, Card, Typography, useTheme } from "@mui/material";
-import { formatNumber } from "../../logic/utils/format";
-import { GameContext, type TargetMetric } from "../../context/GameContext";
+import { Box, CardContent, Card, useTheme } from "@mui/material";
+import { formatNumber } from "../../../logic/utils/format";
+import { GameContext } from "../../../context/GameContext";
 import chroma from "chroma-js";
-import { applySpacing } from "../../theme";
-import { DistributionBarPlot } from "../shared/DistributionBarPlot";
-import { useRef, useState, useEffect } from "react";
+import { applySpacing } from "../../../theme";
+import { GuessTooltip } from "./GuessTooltip";
 
 const getMaxDistance = (
   target: number,
@@ -38,73 +37,6 @@ const getGuessColor = (
 };
 
 interface GuessChartProps {}
-
-interface YAxisTickProps {
-  x: number;
-  y: number;
-  stroke: string;
-  payload: { value: number };
-  target: number;
-  maxEntropy: number;
-  fontFamily: React.CSSProperties["fontFamily"];
-  maxColor: string;
-  minColor: string;
-  targetColor: string;
-}
-
-class ColoredYAxisTick extends PureComponent<YAxisTickProps> {
-  render() {
-    const {
-      x,
-      y,
-      payload,
-      target,
-      maxEntropy,
-      fontFamily,
-      maxColor,
-      minColor,
-      targetColor,
-    } = this.props;
-    const minValue = 0;
-    const maxValue = maxEntropy;
-
-    var content1: string;
-    var content2: string;
-    var color: string;
-
-    if (payload.value === target) {
-      content1 = "Target";
-      content2 = formatNumber(target);
-      color = targetColor;
-    } else if (payload.value === minValue) {
-      content1 = "Minimum";
-      content2 = formatNumber(minValue);
-      color = minColor;
-    } else if (payload.value === maxValue) {
-      content1 = "Maximum";
-      content2 = formatNumber(maxValue);
-      color = maxColor;
-    } else {
-      throw new Error("Invalid payload value");
-    }
-
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} fill={color} fontFamily={fontFamily} textAnchor="end">
-          <tspan x={0} y={-20}>
-            {content1}
-          </tspan>
-          <tspan x={0} y={0}>
-            entropy:
-          </tspan>
-          <tspan x={0} y={20}>
-            {content2}
-          </tspan>
-        </text>
-      </g>
-    );
-  }
-}
 
 interface XAxisTickProps {
   x: number;
@@ -135,73 +67,6 @@ class RotatedXAxisTick extends PureComponent<XAxisTickProps> {
   }
 }
 
-interface GuessTooltipProps {
-  active?: boolean | undefined;
-  payload?: any;
-  label?: string;
-  target: number;
-  metric: TargetMetric;
-}
-
-interface TooltipBarChartProps {
-  distribution: number[];
-}
-
-export const TooltipBarChart = ({ distribution }: TooltipBarChartProps) => {
-  const containerRef = useRef(null);
-  const [width, setWidth] = useState(100);
-  const [height, setHeight] = useState(50);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      setWidth(entries[0].contentRect.width);
-      setHeight(entries[0].contentRect.height);
-    });
-
-    resizeObserver.observe(containerRef.current);
-    return () => resizeObserver.disconnect();
-  }, []);
-
-  return (
-    <Box sx={{ width: "100%" }} ref={containerRef}>
-      <DistributionBarPlot
-        width={width}
-        height={height}
-        distribution={distribution}
-      />
-    </Box>
-  );
-};
-
-const GuessTooltip = ({
-  active,
-  payload,
-  label,
-  target,
-  metric,
-}: GuessTooltipProps) => {
-  if (active && payload && payload.length && payload[0].payload.plotTooltip) {
-    const data = payload[0].payload;
-    return (
-      <Card>
-        <CardContent>
-          <TooltipBarChart distribution={data.distribution} />
-          <Typography variant="body2">
-            {metric === "entropy" ? "Entropy" : "Perplexity"}:{" "}
-            {formatNumber(data.y)}
-          </Typography>
-          <Typography variant="body2">
-            Error: {formatNumber(Math.abs(data.y - target))}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
-  return null;
-};
-
 export const GuessChart: React.FC<GuessChartProps> = () => {
   const { guesses, target, settings } = useContext(GameContext);
   const theme = useTheme();
@@ -225,26 +90,12 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
   const targetValue =
     settings.metric === "entropy" ? target : Math.pow(2, target);
 
-  // targetData is not needed if we aren't plotting targets as points on the scatterplot
-  // If there's a way to do this without creating a new array, I don't know it.
-  // Ideally, we would just add another key to the scatterData array, but
-  // `dataKey` doesn't seem to do anything when provided as a prop to the
-  // Scatter component.
-  // const targetData = Object.keys(guesses).map((key) => ({
-  //   x: Number(key),
-  //   y: target,
-  //   z: 0,
-  //   distribution: [],
-  //   plotTooltip: false,
-  // }));
-
   return (
     <Card>
       <CardContent>
         <Box sx={{ width: "100%", height: 400 }}>
           <ResponsiveContainer>
             <ScatterChart
-              // Left margin has to be sufficient for Y tick labels to appear to left of plot
               margin={applySpacing(
                 theme.customValues.guessScatterMargins,
                 theme.spacing(1)
@@ -293,7 +144,6 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
                 )}
                 defaultIndex={settings.activeTooltipIndex}
               />
-              {/* <Legend /> */}
 
               {/* Reference lines for min, max and target values */}
               <ReferenceLine
@@ -364,17 +214,6 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
                   return <Cell key={`cell-${index}`} fill={color} />;
                 })}
               </Scatter>
-              {/* Scatter plot for the targets */}
-              {/* <Scatter name="Targets" fill="#ccc" data={targetData}>
-            {targetData.map((entry, index) => {
-              return (
-                <Cell
-                  key={`target-cell-${index}`}
-                  fill={theme.customColors.target}
-                />
-              );
-            })}
-          </Scatter> */}
             </ScatterChart>
           </ResponsiveContainer>
         </Box>

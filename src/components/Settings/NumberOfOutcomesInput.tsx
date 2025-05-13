@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { GameContext } from "../../../context/GameContext";
+import { GameContext } from "../../context/GameContext";
 import { TextField } from "@mui/material";
-import { generateNewTarget } from "../../../logic/game/generateNewTarget";
+import { generateNewTarget } from "../../logic/game/generateNewTarget";
+
 export const NumberOfOutcomesInput = () => {
   const { settings, setSettings, setGuesses, setTarget } =
     useContext(GameContext);
@@ -50,7 +51,7 @@ export const NumberOfOutcomesInput = () => {
           htmlInput: { min: 2, max: 50 },
         }}
         error={
-          settings.numOutcomesRaw &&
+          Boolean(settings.numOutcomesRaw) &&
           parseInput(settings.numOutcomesRaw) === null
         }
         helperText={

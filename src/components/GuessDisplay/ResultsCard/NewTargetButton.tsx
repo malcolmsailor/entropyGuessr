@@ -1,11 +1,12 @@
-import { Button, useTheme } from "@mui/material";
+import { Button } from "@mui/material";
 import { useContext } from "react";
-import { GameContext } from "../../context/GameContext";
-import { generateNewTarget } from "../../logic/game/generateNewTarget";
+import { GameContext } from "../../../context/GameContext";
+import { generateNewTarget } from "../../../logic/game/generateNewTarget";
 import { alpha } from "@mui/material/styles";
 
 export const NewTargetButton = () => {
   const { setGuesses, setTarget, settings } = useContext(GameContext);
+
   return (
     <Button
       variant="outlined"

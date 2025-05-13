@@ -50,16 +50,6 @@ export const theme = responsiveFontSizes(
           root: { marginBottom: 0, paddingBottom: 0 },
         },
       },
-
-      MuiCardContent: {
-        styleOverrides: {
-          root: {
-            // "&:last-child": {
-            //   paddingBottom: 1,
-            // },
-          },
-        },
-      },
     },
     customValues: {
       guessScatterMargins: {

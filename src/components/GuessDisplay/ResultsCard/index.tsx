@@ -1,11 +1,11 @@
 import { Typography, Divider } from "@mui/material";
 import { useContext } from "react";
-import { GameContext } from "../../context/GameContext";
+import { GameContext } from "../../../context/GameContext";
 import { CardContent } from "@mui/material";
-import { formatNumber } from "../../logic/utils/format";
+import { formatNumber } from "../../../logic/utils/format";
 import { Card } from "@mui/material";
 import { Box } from "@mui/material";
-import { NewTargetButton } from "../TargetDisplayArea/NewTargetButton";
+import { NewTargetButton } from "./NewTargetButton";
 
 export const ResultsCard = () => {
   const cardStyle = {
@@ -51,13 +51,9 @@ export const ResultsCard = () => {
   return (
     <Card sx={cardStyle}>
       <Box
-        // display="flex"
-        // flexDirection="column"
         justifyContent="center"
-        // alignItems="center"
         height="100%"
         sx={{
-          // This will style all Typography elements inside this Box
           "& .MuiTypography-root": {
             textAlign: "center",
             marginY: 1.3,

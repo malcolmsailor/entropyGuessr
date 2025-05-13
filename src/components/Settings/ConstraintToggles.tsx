@@ -4,7 +4,7 @@ import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { Collapse } from "@mui/material";
 import { useContext, useState } from "react";
-import { GameContext } from "../../../context/GameContext";
+import { GameContext } from "../../context/GameContext";
 
 export const ConstraintToggles = () => {
   const { constraints, setConstraints } = useContext(GameContext);
