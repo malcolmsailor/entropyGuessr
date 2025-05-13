@@ -37,10 +37,7 @@ export const ResultsCard = () => {
           </span>
         </Typography>
         <Typography variant="h5">
-          <span style={{ fontWeight: "bold" }}>
-            Error {settings.metric.toLowerCase()}:
-          </span>{" "}
-          <br />
+          <span style={{ fontWeight: "bold" }}>Error:</span> <br />
           <span style={{ fontWeight: "normal" }}>
             {formatNumber(Math.abs(guessValue - targetValue))}
           </span>

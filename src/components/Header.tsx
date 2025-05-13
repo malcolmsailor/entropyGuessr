@@ -27,7 +27,7 @@ export const Header = () => {
               EntropyGuessr
             </Typography>
             <Typography variant="h5" sx={{ textAlign: "center" }}>
-              Guess a distribution with the target entropy.
+              Your goal is to guess a distribution with the target entropy.
             </Typography>
           </Grid>
           <Grid
