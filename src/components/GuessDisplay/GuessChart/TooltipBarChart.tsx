@@ -23,12 +23,15 @@ export const TooltipBarChart = ({ distribution }: TooltipBarChartProps) => {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const labelBars = distribution.length <= 5;
+
   return (
     <Box sx={{ width: "100%" }} ref={containerRef}>
       <DistributionBarPlot
         width={width}
         height={height}
         distribution={distribution}
+        labelBars={labelBars}
       />
     </Box>
   );

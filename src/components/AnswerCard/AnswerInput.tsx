@@ -14,7 +14,7 @@ export const AnswerInput = () => {
     }
     const bits = answer.trim().split(/\s+/);
     for (const bit of bits) {
-      if (!bit.match(/^-?\d+\.?\d*$/)) {
+      if (!bit.match(/^-?\d+\.?\d*$|^-?\.\d*$/)) {
         return false;
       }
     }
@@ -22,7 +22,7 @@ export const AnswerInput = () => {
   };
 
   return (
-    <FormControl>
+    <FormControl sx={{ width: "100%" }}>
       <TextField
         label="E.g., '0.5 0.3 0.2'"
         variant="outlined"

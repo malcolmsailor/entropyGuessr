@@ -10,7 +10,7 @@ import type { TargetMetric } from "../../context/GameContext";
 export const MetricSelector = () => {
   const { settings, setSettings } = useContext(GameContext);
   return (
-    <FormControl>
+    <FormControl sx={{ marginTop: -1 }}>
       <FormLabel>Target Metric</FormLabel>
       <RadioGroup
         row
@@ -22,11 +22,16 @@ export const MetricSelector = () => {
           })
         }
       >
-        <FormControlLabel value="entropy" control={<Radio />} label="Entropy" />
+        <FormControlLabel
+          value="entropy"
+          control={<Radio sx={{ paddingY: 0 }} />}
+          label="Entropy"
+        />
         <FormControlLabel
           value="perplexity"
-          control={<Radio />}
+          control={<Radio sx={{ paddingY: 0 }} />}
           label="Perplexity"
+          sx={{ padding: 0 }}
         />
       </RadioGroup>
     </FormControl>

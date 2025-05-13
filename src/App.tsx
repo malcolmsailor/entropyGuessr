@@ -10,7 +10,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GameContextProvider>
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
+          {/* To test how it will look within a fixed width container like on my 
+              Jekyll site, replace above Container declaration with the following: */}
+          {/* <Container maxWidth={false} sx={{ maxWidth: "600px" }}> */}
           <EntropyGame />
         </Container>
       </GameContextProvider>

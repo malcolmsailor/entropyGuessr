@@ -56,7 +56,7 @@ export const theme = responsiveFontSizes(
         left: 2,
         right: 2,
         top: 2,
-        bottom: 3,
+        bottom: 3.5,
       },
     },
     customColors: {

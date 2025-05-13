@@ -20,7 +20,7 @@ export const AnswerBarChart = ({ gridSize }: AnswerBarChartProps) => {
 
   const containerRef = useRef(null);
   const [width, setWidth] = useState(400);
-  const height = 100;
+  const height = 50;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -33,12 +33,19 @@ export const AnswerBarChart = ({ gridSize }: AnswerBarChartProps) => {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const labelBars = settings.numOutcomes <= 4;
+
   return (
-    <Grid size={gridSize} ref={containerRef}>
+    <Grid
+      size={gridSize}
+      ref={containerRef}
+      sx={{ marginTop: -1, marginBottom: 0 }}
+    >
       <DistributionBarPlot
         width={width}
         height={height}
         distribution={parsedAnswer}
+        labelBars={labelBars}
       />
     </Grid>
   );

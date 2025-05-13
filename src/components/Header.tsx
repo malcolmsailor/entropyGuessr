@@ -1,8 +1,17 @@
-import { CardContent, Typography, Card, Grid, Link } from "@mui/material";
-
+import {
+  CardContent,
+  Typography,
+  Card,
+  Grid,
+  Link,
+  Tooltip,
+} from "@mui/material";
+import githubMark from "../assets/github-mark-white.svg";
 export const Header = () => {
   return (
-    <Card>
+    <Card
+      sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}
+    >
       <CardContent>
         <Grid container spacing={2}>
           <Grid
@@ -13,11 +22,14 @@ export const Header = () => {
               justifyContent: "center",
             }}
           >
-            {/* TODO: update link to point to the about page */}
             <Link
-              href="https://malcolmsailor.com"
+              href="https://malcolmsailor.com/2025/05/13/entropy-guessr.html"
               color="inherit"
               underline="hover"
+              sx={{
+                "&:visited": { color: "inherit" },
+                "&:hover": { color: "inherit" },
+              }}
             >
               About
             </Link>
@@ -26,9 +38,9 @@ export const Header = () => {
             <Typography variant="h3" sx={{ textAlign: "center" }}>
               EntropyGuessr
             </Typography>
-            <Typography variant="h5" sx={{ textAlign: "center" }}>
+            {/* <Typography variant="h5" sx={{ textAlign: "center" }}>
               Your goal is to guess a distribution with the target entropy.
-            </Typography>
+            </Typography> */}
           </Grid>
           <Grid
             size={1}
@@ -38,14 +50,15 @@ export const Header = () => {
               justifyContent: "center",
             }}
           >
-            {/* TODO: update link to point to the repo */}
-            <a href="https://github.com/malcolmsailor/entropyGuessr">
-              <img
-                src="assets/github-mark.svg"
-                alt="GitHub"
-                style={{ width: "32px", height: "32px" }}
-              />
-            </a>
+            <Link href="https://github.com/malcolmsailor/entropyGuessr">
+              <Tooltip title="GitHub">
+                <img
+                  src={githubMark}
+                  alt="GitHub"
+                  style={{ width: "32px", height: "32px" }}
+                />
+              </Tooltip>
+            </Link>
           </Grid>
         </Grid>
       </CardContent>

@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 import { AnswerInput } from "./AnswerInput";
 import { AnswerBarChart } from "./AnswerBarChart";
 import { CalculateButton } from "./CalculateButton";
@@ -18,24 +11,24 @@ export const AnswerCard = () => {
   return (
     <Card sx={{ width: "100%", height: "100%" }}>
       <CardHeader title="Answer" />
-      <CardContent>
+      <CardContent sx={{ marginBottom: -2 }}>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <Stack spacing={1} direction="column">
-              <AnswerInput />
-              <CalculateButton />
-              {validationErrors && (
-                <>
-                  {validationErrors.map((error) => (
-                    <Typography key={error} color="error">
-                      {error}
-                    </Typography>
-                  ))}
-                </>
-              )}
-            </Stack>
+          <Grid size={{ xs: 12 }}>
+            <AnswerInput />
           </Grid>
-          <AnswerBarChart gridSize={{ xs: 12, sm: 6 }} />
+          <Grid size={{ xs: 6 }}>
+            <CalculateButton />
+            {validationErrors && (
+              <>
+                {validationErrors.map((error) => (
+                  <Typography key={error} color="error">
+                    {error}
+                  </Typography>
+                ))}
+              </>
+            )}
+          </Grid>
+          <AnswerBarChart gridSize={{ xs: 6 }} />
         </Grid>
       </CardContent>
     </Card>

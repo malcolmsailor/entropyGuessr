@@ -4,11 +4,14 @@ import type {
 } from "../../context/GameContext";
 
 function isValidFloat(str: string) {
-  const trimmed = str.trim();
+  var trimmed = str.trim();
   const parsed = parseFloat(trimmed);
   // Handle special case of zero with decimal places
   if (parsed === 0 && /^0\.0+$/.test(trimmed)) {
     return true;
+  }
+  if (trimmed[0] === "." && trimmed.length > 1) {
+    trimmed = "0" + trimmed;
   }
   return !isNaN(parsed) && parsed.toString().length === trimmed.length;
 }

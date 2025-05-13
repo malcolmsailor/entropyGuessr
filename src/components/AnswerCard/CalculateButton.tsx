@@ -44,7 +44,11 @@ export const CalculateButton = () => {
   };
 
   return (
-    <Button variant="contained" onClick={calculate}>
+    <Button
+      variant="contained"
+      onClick={calculate}
+      sx={{ marginBottom: 0, width: "100%" }}
+    >
       Make guess
     </Button>
   );

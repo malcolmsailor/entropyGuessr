@@ -90,6 +90,9 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
   const targetValue =
     settings.metric === "entropy" ? target : Math.pow(2, target);
 
+  const numGuesses = Object.keys(guesses).length;
+  const xMax = numGuesses < 5 ? 5 * 1.333 : numGuesses * 1.333;
+
   return (
     <Card>
       <CardContent>
@@ -105,7 +108,7 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
                 dataKey="x"
                 name="Guess"
                 axisLine={false}
-                domain={[0, 8]}
+                domain={[0, xMax]}
                 type="number"
                 ticks={Object.keys(guesses).map(Number)}
                 tickLine={{ stroke: theme.customColors.min }}

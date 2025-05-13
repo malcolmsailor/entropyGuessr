@@ -6,10 +6,10 @@ import { ResultsCard } from "./ResultsCard";
 export const GuessDisplay = () => {
   return (
     <Grid container spacing={2}>
-      <Grid size={{ xs: 12, sm: 3, md: 2 }}>
+      <Grid size={{ xs: 3, sm: 3 }}>
         <ResultsCard />
       </Grid>
-      <Grid size={{ xs: 12, sm: 9, md: 10 }}>
+      <Grid size={{ xs: 9, sm: 9 }}>
         <GuessChart />
       </Grid>
     </Grid>
