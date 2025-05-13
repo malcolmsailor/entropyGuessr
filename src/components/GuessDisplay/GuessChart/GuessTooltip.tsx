@@ -16,7 +16,6 @@ interface GuessTooltipProps {
 export const GuessTooltip = ({
   active,
   payload,
-  label,
   target,
   metric,
 }: GuessTooltipProps) => {
