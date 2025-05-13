@@ -39,7 +39,7 @@ export const Header = () => {
             }}
           >
             {/* TODO: update link to point to the repo */}
-            <a href="https://github.com/malcolmsailor">
+            <a href="https://github.com/malcolmsailor/entropyGuessr">
               <img
                 src="assets/github-mark.svg"
                 alt="GitHub"
