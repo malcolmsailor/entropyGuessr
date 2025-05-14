@@ -4,7 +4,7 @@ I initialized the project with
 
 ```bash
 npm create vite@latest
-cd entropy-mui
+cd entropy-guessr
 npm install
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
