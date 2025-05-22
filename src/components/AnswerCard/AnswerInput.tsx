@@ -30,6 +30,7 @@ export const AnswerInput = () => {
         onChange={(event) => setAnswer(event.target.value)}
         error={!validateRawAnswer()}
         helperText={!validateRawAnswer() ? "Enter space-separated numbers" : ""}
+        slotProps={{ htmlInput: { style: { fontSize: "16px" } } }}
       />
     </FormControl>
   );

@@ -36,6 +36,10 @@ export const applySpacing = (obj: SpacingSpec, spacing: string) => {
   );
 };
 
+// Create a breakpoints-only theme
+const breakpointsTheme = createTheme();
+const { breakpoints } = breakpointsTheme;
+
 export const theme = responsiveFontSizes(
   createTheme({
     palette: {
@@ -43,6 +47,16 @@ export const theme = responsiveFontSizes(
     },
     typography: {
       fontSize: 12,
+      h5: {
+        [breakpoints.down("sm")]: {
+          fontSize: "0.875rem",
+        },
+      },
+      h6: {
+        [breakpoints.down("sm")]: {
+          fontSize: "0.825rem",
+        },
+      },
     },
     components: {
       MuiCardHeader: {

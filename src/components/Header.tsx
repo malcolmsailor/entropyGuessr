@@ -5,20 +5,31 @@ import {
   Grid,
   Link,
   Tooltip,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import githubMark from "../assets/github-mark-white.svg";
 export const Header = () => {
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Card
-      sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}
+      sx={{
+        backgroundColor: "primary.main",
+        color: "primary.contrastText",
+      }}
     >
       <CardContent>
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={isXs ? 1 : 2}
+          sx={{ marginTop: isXs ? -0.5 : 0, marginBottom: isXs ? -1.5 : 0 }}
+        >
           <Grid
             size={1}
             sx={{
               display: "flex",
-              alignItems: "flex-end",
+              alignItems: "center",
               justifyContent: "center",
             }}
           >
@@ -29,6 +40,7 @@ export const Header = () => {
               sx={{
                 "&:visited": { color: "inherit" },
                 "&:hover": { color: "inherit" },
+                fontSize: isXs ? "0.875rem" : "1rem",
               }}
             >
               About
@@ -46,7 +58,7 @@ export const Header = () => {
             size={1}
             sx={{
               display: "flex",
-              alignItems: "flex-end",
+              alignItems: "center",
               justifyContent: "center",
             }}
           >
@@ -55,7 +67,10 @@ export const Header = () => {
                 <img
                   src={githubMark}
                   alt="GitHub"
-                  style={{ width: "32px", height: "32px" }}
+                  style={{
+                    width: isXs ? "24px" : "32px",
+                    height: isXs ? "24px" : "32px",
+                  }}
                 />
               </Tooltip>
             </Link>

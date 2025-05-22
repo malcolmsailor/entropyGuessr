@@ -9,11 +9,10 @@ import {
   ScatterChart,
   Cell,
 } from "recharts";
-import { Box, CardContent, Card, useTheme } from "@mui/material";
+import { Box, CardContent, Card, useTheme, useMediaQuery } from "@mui/material";
 import { formatNumber } from "../../../logic/utils/format";
 import { GameContext } from "../../../context/GameContext";
 import chroma from "chroma-js";
-import { applySpacing } from "../../../theme";
 import { GuessTooltip } from "./GuessTooltip";
 
 const getMaxDistance = (
@@ -44,11 +43,12 @@ interface XAxisTickProps {
   stroke: string;
   payload: { value: number };
   fontFamily: React.CSSProperties["fontFamily"];
+  fontSize: React.CSSProperties["fontSize"];
 }
 
 class RotatedXAxisTick extends PureComponent<XAxisTickProps> {
   render() {
-    const { x, y, stroke, payload, fontFamily } = this.props;
+    const { x, y, stroke, payload, fontFamily, fontSize } = this.props;
     return (
       <g transform={`translate(${x},${y})`}>
         <text
@@ -58,6 +58,7 @@ class RotatedXAxisTick extends PureComponent<XAxisTickProps> {
           textAnchor="end"
           fill={stroke}
           fontFamily={fontFamily}
+          fontSize={fontSize}
           transform="rotate(-35)"
         >
           {`Guess ${payload.value}`}
@@ -70,6 +71,7 @@ class RotatedXAxisTick extends PureComponent<XAxisTickProps> {
 export const GuessChart: React.FC<GuessChartProps> = () => {
   const { guesses, target, settings } = useContext(GameContext);
   const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const scatterData = Object.keys(guesses).map((key) => ({
     x: Number(key),
@@ -94,16 +96,19 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
   const xMax = numGuesses < 5 ? 5 * 1.333 : numGuesses * 1.333;
 
   return (
-    <Card>
-      <CardContent>
-        <Box sx={{ width: "100%", height: 400 }}>
-          <ResponsiveContainer>
-            <ScatterChart
-              margin={applySpacing(
-                theme.customValues.guessScatterMargins,
-                theme.spacing(1)
-              )}
-            >
+    <Card sx={{ height: "100%" }}>
+      <CardContent sx={{ height: "100%" }}>
+        <Box
+          sx={{
+            width: "100%",
+            flexGrow: 1,
+            minHeight: "200px",
+            maxHeight: "500px",
+            height: "100%",
+          }}
+        >
+          <ResponsiveContainer minHeight={200}>
+            <ScatterChart margin={{ top: 0, right: 0, bottom: 20, left: 5 }}>
               <XAxis
                 dataKey="x"
                 name="Guess"
@@ -121,6 +126,7 @@ export const GuessChart: React.FC<GuessChartProps> = () => {
                           // leading to the text not being visible
                           stroke={theme.customColors.min}
                           fontFamily={theme.typography.fontFamily}
+                          fontSize={isXs ? ".75rem" : ".875rem"}
                         />
                       )
                     : false

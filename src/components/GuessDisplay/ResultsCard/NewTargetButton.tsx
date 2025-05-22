@@ -23,6 +23,7 @@ export const NewTargetButton = () => {
         boxShadow: (theme) =>
           `0px 3px 5px ${alpha(theme.palette.common.black, 0.2)}`,
         width: "100%",
+        fontSize: { xs: "0.625rem", sm: "0.75rem", md: "0.875rem" },
       }}
     >
       Generate New Target

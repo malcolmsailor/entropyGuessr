@@ -57,7 +57,7 @@ export const ResultsCard = () => {
           },
         }}
       >
-        <CardContent>
+        <CardContent sx={{ padding: { xs: 0.5, sm: 1 } }}>
           <Typography variant="h5">
             <span style={{ fontWeight: "bold" }}>
               Target {settings.metric.toLowerCase()}:

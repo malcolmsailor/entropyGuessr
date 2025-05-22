@@ -1,5 +1,5 @@
 import { GuessDisplay } from "./GuessDisplay";
-import { Grid } from "@mui/material";
+import { Grid, useTheme, useMediaQuery } from "@mui/material";
 import { AnswerCard } from "./AnswerCard";
 import { Settings } from "./Settings";
 import { Header } from "./Header";
@@ -9,8 +9,16 @@ interface EntropyGameProps {
 }
 
 export const EntropyGame = ({ className }: EntropyGameProps) => {
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMd = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Grid container spacing={2} className={className}>
+    <Grid
+      container
+      spacing={isXs ? 1 : isMd ? 1.5 : 2}
+      className={className}
+      // sx={{ height: "100%" }}
+    >
       <Grid size={12}>
         <Header />
       </Grid>
@@ -20,7 +28,7 @@ export const EntropyGame = ({ className }: EntropyGameProps) => {
       <Grid size={{ sm: 12, md: 6 }}>
         <AnswerCard />
       </Grid>
-      <Grid size={12}>
+      <Grid size={12} sx={{ height: "100%" }}>
         <GuessDisplay />
       </Grid>
     </Grid>
